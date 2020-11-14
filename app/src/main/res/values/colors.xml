@@ -3,4 +3,6 @@
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#151515</color>
     <color name="colorAccent">#FF7043</color>
+    <color name="loding_strat_color">#3C65FF</color>
+    <color name="loding_end_color">#ACCBFF</color>
 </resources>

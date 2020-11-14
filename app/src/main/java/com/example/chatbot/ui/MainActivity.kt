@@ -34,18 +34,18 @@ class MainActivity : AppCompatActivity() {
 
         clickEvents()
 
-        val random = (0..3).random()
-        customBotMessage("안녕하세요! 당신의 이야기에 답해줄 ${botList[random]}, 입니다. 무엇을 도와드릴까요?")
+        val random = (0..5).random()
+        customBotMessage("안녕하세요! 당신의 이야기에 답해줄 ${botList[random]} 입니다. 무엇을 도와드릴까요?")
     }
 
     private fun clickEvents() {
 
-        //Send a message
+        //메세지 보내기 버튼 클릭
         btn_send.setOnClickListener {
             sendMessage()
         }
 
-        //Scroll back to correct position when user clicks on text view
+        //메세지 입력바를 눌렀을때
         et_message.setOnClickListener {
             GlobalScope.launch {
                 delay(100)
@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity() {
         val timeStamp = Time.timeStamp()
 
         GlobalScope.launch {
-            //Fake response delay
+            //응답지연시간
             delay(1000)
 
             withContext(Dispatchers.Main) {
@@ -106,13 +106,13 @@ class MainActivity : AppCompatActivity() {
                 //Adds it to our local list
                 messagesList.add(Message(response, RECEIVE_ID, timeStamp))
 
-                //Inserts our message into the adapter
+                //adapter에 메세지를 넣음
                 adapter.insertMessage(Message(response, RECEIVE_ID, timeStamp))
 
-                //Scrolls us to the position of the latest message
+                //가장 먼저 타이핑한 메세지를 위로
                 rv_messages.scrollToPosition(adapter.itemCount - 1)
 
-                //Starts Google
+                //구글 연동
                 when (response) {
                     OPEN_GOOGLE -> {
                         val site = Intent(Intent.ACTION_VIEW)
@@ -121,7 +121,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     OPEN_SEARCH -> {
                         val site = Intent(Intent.ACTION_VIEW)
-                        val searchTerm: String? = message.substringAfterLast("search")
+                        val searchTerm: String? = message.substringAfterLast("검색")
                         site.data = Uri.parse("https://www.google.com/search?&q=$searchTerm")
                         startActivity(site)
                     }

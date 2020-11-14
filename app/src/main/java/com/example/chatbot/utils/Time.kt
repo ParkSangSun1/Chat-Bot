@@ -4,6 +4,7 @@ import java.sql.Date
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 
+//시간
 object Time {
     fun timeStamp(): String {
 
